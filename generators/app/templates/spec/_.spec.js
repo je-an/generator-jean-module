@@ -1,7 +1,7 @@
 // jscs:disable
 // jshint ignore:start
 define([
-    "src/<%= constructor %>"
+    "<%= constructor %>"
 ], function (<%= constructor %>) {
     describe('<%= constructor %>.spec.js', function () {
         var instance;
