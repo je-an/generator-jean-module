@@ -1,8 +1,9 @@
 ({
     baseUrl: '.',
-    out: 'dist/<%= constructor %>.js',
+    out: 'dist/<%= name %>.js',
     optimize: '<%= optimize %>',
-    include: ["node_modules/almond/almond", "src/<%= constructor %>"],
+    name: 'node_modules/jean-amd/dist/jean-amd',
+    include: ["src/<%= constructor %>"],
     wrap: {
         start: 
         "(function (root, factory) { \n" +
