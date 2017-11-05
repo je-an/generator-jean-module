@@ -1,6 +1,5 @@
 'use strict';
 const Generator = require('yeoman-generator');
-const stringifyObject = require('stringify-object');
 const chalk = require('chalk');
 const yosay = require('yosay');
 var mkdirp = require('mkdirp');
