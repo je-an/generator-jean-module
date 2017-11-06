@@ -15,6 +15,13 @@ module.exports = class extends Generator {
     ));
 
     const prompts = [{
+      type: 'list',
+      name: "type",
+      message: "All Plattforms, CommonJS or AMD + Global variable ? ",
+      choices: ["All", "CommonJS", "AMD + Global variable"],
+      default: "All"
+    },
+    {
       type: 'input',
       name: 'name',
       message: "What is the name of this module: ",
@@ -55,7 +62,8 @@ module.exports = class extends Generator {
       description: this.props.description,
       keywords: JSON.stringify(keywords),
       optimize: this.props.optimize,
-      constructor: this.props.constructor
+      constructor: this.props.constructor,
+      type: this.props.type
     };
     path = args.constructor;
     console.log("writing: " + path);
@@ -80,11 +88,29 @@ module.exports = class extends Generator {
       this.destinationPath(path + '/.gitignore'),
       args
     );
-    this.fs.copyTpl(
-      this.templatePath('_build.js'),
-      this.destinationPath(path + '/build.js'),
-      args
-    );
+    switch (args.type) {
+      case "All":
+        this.fs.copyTpl(
+          this.templatePath('build.all.js'),
+          this.destinationPath(path + '/build.js'),
+          args
+        );
+        break;
+      case "CommonJS":
+        this.fs.copyTpl(
+          this.templatePath('build.backend.js'),
+          this.destinationPath(path + '/build.js'),
+          args
+        );
+        break;
+      case "AMD + Global variable":
+        this.fs.copyTpl(
+          this.templatePath('build.frontend.js'),
+          this.destinationPath(path + '/build.js'),
+          args
+        );
+        break;
+    }
     var specPath = path + "/spec";
     mkdirp.sync(specPath);
     this.fs.copyTpl(
