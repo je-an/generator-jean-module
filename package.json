@@ -2,11 +2,11 @@
   "name": "generator-jean-module",
   "version": "1.0.3",
   "description": "Creates module structure for jean environment",
-  "homepage": "",
+  "homepage": "http:\\www.jeremiasandris.de",
   "author": {
     "name": "Jeremias Andris",
     "email": "mail@jeremiasandris.de",
-    "url": "jeremiasandris.de"
+    "url": "http:\\www.jeremiasandris.de"
   },
   "files": [
     "generators"
