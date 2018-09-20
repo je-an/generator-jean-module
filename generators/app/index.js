@@ -31,12 +31,7 @@ module.exports = class extends Generator {
       name: 'description',
       message: 'Describe the functionality of this module: ',
       default: "Please provide additional information"
-    }/* , {
-      type: 'input',
-      name: 'keywords',
-      message: 'Describe this module with keywords (Splitted by comma): ',
-      default: ""
-    } */,
+    },
     {
       type: 'input',
       name: 'constructor',
@@ -48,6 +43,13 @@ module.exports = class extends Generator {
       message: "Would you like to optimize your module for build process: ",
       choices: ["none", "uglify2"],
       default: "none"
+    },
+    {
+      type: 'list',
+      name: "example",
+      message: "Would you like to add an example playground: ",
+      choices: ["yes", "no"],
+      default: "no"
     }];
     return this.prompt(prompts).then(props => {
       this.props = props;
@@ -63,7 +65,8 @@ module.exports = class extends Generator {
       keywords: JSON.stringify(keywords),
       optimize: this.props.optimize,
       constructor: this.props.constructor,
-      type: this.props.type
+      type: this.props.type,
+      example: this.props.example
     };
     path = args.constructor;
     console.log("writing: " + path);
@@ -130,6 +133,37 @@ module.exports = class extends Generator {
       this.destinationPath(srcPath + '/' + args.constructor + '.js'),
       args
     );
+
+    if (args.example === "yes") {
+      var examplePath = path + "/example",
+          imgPath = examplePath + "/img",
+          libPath = examplePath + "/lib";
+      mkdirp.sync(examplePath);
+      mkdirp.sync(libPath);
+      this.fs.copyTpl(
+        this.templatePath('example/index.html'),
+        this.destinationPath(examplePath + '/index.html'),
+        args
+      );
+      this.fs.copyTpl(
+        this.templatePath('example/index.js'),
+        this.destinationPath(examplePath + '/index.js'),
+        args
+      );
+      this.fs.copyTpl(
+        this.templatePath('example/require.config.js'),
+        this.destinationPath(examplePath + '/require.config.js'),
+        args
+      );
+      this.fs.copy(
+        this.templatePath("example/lib"),
+        this.destinationPath(libPath)
+      );
+      this.fs.copy(
+        this.templatePath("example/img"),
+        this.destinationPath(imgPath)
+      );
+    }
     var elementDir = process.cwd() + '/' + path;
     process.chdir(elementDir)
     this.installDependencies({
