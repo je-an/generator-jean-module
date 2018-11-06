@@ -20,5 +20,6 @@
     },
      paths:{
        
-    }
+    },
+    stubModules: ["css", "text", "normalize", "css-builder"]
 })
