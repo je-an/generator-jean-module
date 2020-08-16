@@ -3,22 +3,22 @@
 <%= description %>
 
 ## Support
-Supports both CommonJS and AMD eco system. If there is no loader, <%= constructor %> is registered as a browser variable.
+Supports both CommonJS and AMD eco system. If there is no loader, <%= constr %> is registered as a browser variable.
 
 ## Code Example
 - Use it as browser variable
 ```js
-var obj = new <%= constructor %>();
+var obj = new <%= constr %>();
 ```
 - Use it with require.js
 ```js
-require(["path/to/<%= constructor %>"], function(<%= constructor %>){
-    // Work with <%= constructor %>
+require(["path/to/<%= constr %>"], function(<%= constr %>){
+    // Work with <%= constr %>
 });
 ```
 - Use it with node.js
 ```js
-var <%= constructor %> = require("<%= name %>");
+var <%= constr %> = require("<%= name %>");
 ```
 ## Installation
 

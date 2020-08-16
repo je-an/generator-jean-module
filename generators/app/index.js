@@ -10,8 +10,9 @@ var path = "";
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
+    console.log("Start");
     this.log(yosay(
-      'Welcome to the ' + chalk.red('jean-module') + ' generator!'
+      'Welcome to the ' + chalk.red('jean-module') + ' generator123!'
     ));
 
     const prompts = [{
@@ -26,7 +27,8 @@ module.exports = class extends Generator {
       name: 'name',
       message: "What is the name of this module: ",
       default: ""
-    }, {
+    },
+    {
       type: 'input',
       name: 'description',
       message: 'Describe the functionality of this module: ',
@@ -34,7 +36,7 @@ module.exports = class extends Generator {
     },
     {
       type: 'input',
-      name: 'constructor',
+      name: 'constr',
       message: 'What is the name of this modules main class: ',
       default: ""
     }, {
@@ -64,11 +66,11 @@ module.exports = class extends Generator {
       description: this.props.description,
       keywords: JSON.stringify(keywords),
       optimize: this.props.optimize,
-      constructor: this.props.constructor,
+      constr: this.props.constr,
       type: this.props.type,
       example: this.props.example
     };
-    path = args.constructor;
+    path = this.props.constr;
     console.log("writing: " + path);
     mkdirp.sync(path);
     this.fs.copyTpl(
@@ -118,7 +120,7 @@ module.exports = class extends Generator {
     mkdirp.sync(specPath);
     this.fs.copyTpl(
       this.templatePath('spec/_.spec.js'),
-      this.destinationPath(specPath + '/' + args.constructor + '.spec.js'),
+      this.destinationPath(specPath + '/' + args.constr + '.spec.js'),
       args
     );
     this.fs.copyTpl(
@@ -130,14 +132,14 @@ module.exports = class extends Generator {
     mkdirp.sync(srcPath);
     this.fs.copyTpl(
       this.templatePath('src/_.js'),
-      this.destinationPath(srcPath + '/' + args.constructor + '.js'),
+      this.destinationPath(srcPath + '/' + args.constr + '.js'),
       args
     );
 
     if (args.example === "yes") {
       var examplePath = path + "/example",
-          imgPath = examplePath + "/img",
-          libPath = examplePath + "/lib";
+        imgPath = examplePath + "/img",
+        libPath = examplePath + "/lib";
       mkdirp.sync(examplePath);
       mkdirp.sync(libPath);
       this.fs.copyTpl(

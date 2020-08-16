@@ -1,13 +1,13 @@
 define([], function () {
     /**
      * <%= description %> 
-     * @alias <%= constructor %> 
-     * @constructor
+     * @alias <%= constr %> 
+     * @constr
      * @param {Object} options - options object
      */
-    var <%= constructor %> = function(options){
+    var <%= constr %> = function(options){
 
     };
 
-    return <%= constructor %>;
+    return <%= constr %>;
 });

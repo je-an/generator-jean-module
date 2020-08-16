@@ -3,19 +3,19 @@
     out: 'dist/<%= name %>.js',
     optimize: '<%= optimize %>',
     name: 'node_modules/jean-amd/dist/jean-amd',
-    include: ["src/<%= constructor %>"],
+    include: ["src/<%= constr %>"],
     wrap: {
         start: 
         "(function (root, factory) { \n" +
         " \t if (typeof define === 'function' && define.amd) { \n" +
         "\t \t define([], factory); \n" +
         "\t} else { \n" +
-        "\t \troot.<%= constructor %> = root.<%= constructor %> || {}; \n" +
-        "\t \troot.<%= constructor %> = factory();\n" +
+        "\t \troot.<%= constr %> = root.<%= constr %> || {}; \n" +
+        "\t \troot.<%= constr %> = factory();\n" +
         "\t}\n" +
         "}(this, function() {",
         end:
-        "\n \t return require('src/<%= constructor %>'); \n" +
+        "\n \t return require('src/<%= constr %>'); \n" +
         "}));"
     },
      paths:{
